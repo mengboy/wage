@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.white.ssm.mapper.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.white.ssm.model.Admin" >
+    <id column="a_id" property="aId" jdbcType="INTEGER" />
+    <result column="a_pass" property="aPass" jdbcType="VARCHAR" />
+    <result column="a_phone" property="aPhone" jdbcType="VARCHAR" />
+    <result column="a_name" property="aName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    a_id, a_pass, a_phone, a_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin_t
+    where a_id = #{aId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admin_t
+    where a_id = #{aId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.white.ssm.model.Admin" >
+    insert into admin_t (a_id, a_pass, a_phone, 
+      a_name)
+    values (#{aId,jdbcType=INTEGER}, #{aPass,jdbcType=VARCHAR}, #{aPhone,jdbcType=VARCHAR}, 
+      #{aName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.white.ssm.model.Admin" >
+    insert into admin_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aId != null" >
+        a_id,
+      </if>
+      <if test="aPass != null" >
+        a_pass,
+      </if>
+      <if test="aPhone != null" >
+        a_phone,
+      </if>
+      <if test="aName != null" >
+        a_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aId != null" >
+        #{aId,jdbcType=INTEGER},
+      </if>
+      <if test="aPass != null" >
+        #{aPass,jdbcType=VARCHAR},
+      </if>
+      <if test="aPhone != null" >
+        #{aPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="aName != null" >
+        #{aName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.white.ssm.model.Admin" >
+    update admin_t
+    <set >
+      <if test="aPass != null" >
+        a_pass = #{aPass,jdbcType=VARCHAR},
+      </if>
+      <if test="aPhone != null" >
+        a_phone = #{aPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="aName != null" >
+        a_name = #{aName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.white.ssm.model.Admin" >
+    update admin_t
+    set a_pass = #{aPass,jdbcType=VARCHAR},
+      a_phone = #{aPhone,jdbcType=VARCHAR},
+      a_name = #{aName,jdbcType=VARCHAR}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+</mapper>

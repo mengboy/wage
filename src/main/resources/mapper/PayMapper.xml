@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.white.ssm.mapper.PayMapper" >
+  <resultMap id="BaseResultMap" type="com.white.ssm.model.Pay" >
+    <id column="p_id" property="pId" jdbcType="INTEGER" />
+    <result column="e_id" property="eId" jdbcType="INTEGER" />
+    <result column="p_bonus" property="pBonus" jdbcType="DOUBLE" />
+    <result column="p_year" property="pYear" jdbcType="CHAR" />
+    <result column="p_mounth" property="pMounth" jdbcType="CHAR" />
+    <result column="p_status" property="pStatus" jdbcType="INTEGER" />
+    <result column="p_time" property="pTime" jdbcType="TIMESTAMP" />
+    <result column="p_basic" property="pBasic" jdbcType="DOUBLE" />
+    <result column="p_title" property="pTitle" jdbcType="DOUBLE" />
+    <result column="p_duties" property="pDuties" jdbcType="DOUBLE" />
+    <result column="p_skill" property="pSkill" jdbcType="DOUBLE" />
+    <result column="p_education" property="pEducation" jdbcType="DOUBLE" />
+    <result column="p_overtime" property="pOvertime" jdbcType="DOUBLE" />
+    <result column="p_walfare" property="pWalfare" jdbcType="DOUBLE" />
+    <result column="i_social" property="iSocial" jdbcType="DOUBLE" />
+    <result column="i_pension" property="iPension" jdbcType="DOUBLE" />
+    <result column="i_medical" property="iMedical" jdbcType="DOUBLE" />
+    <result column="i_unemploy" property="iUnemploy" jdbcType="DOUBLE" />
+    <result column="p_housing" property="pHousing" jdbcType="DOUBLE" />
+    <result column="p_absence" property="pAbsence" jdbcType="DOUBLE" />
+    <result column="p_fineother" property="pFineother" jdbcType="DOUBLE" />
+    <result column="p_finesum" property="pFinesum" jdbcType="DOUBLE" />
+    <result column="p_shouldsum" property="pShouldsum" jdbcType="DOUBLE" />
+    <result column="p_realsum" property="pRealsum" jdbcType="DOUBLE" />
+    <result column="p_tax" property="pTax" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    p_id, e_id, p_bonus, p_year, p_mounth, p_status, p_time, p_basic, p_title, p_duties, 
+    p_skill, p_education, p_overtime, p_walfare, i_social, i_pension, i_medical, i_unemploy, 
+    p_housing, p_absence, p_fineother, p_finesum, p_shouldsum, p_realsum, p_tax
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pay_t
+    where p_id = #{pId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pay_t
+    where p_id = #{pId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.white.ssm.model.Pay" >
+    insert into pay_t (p_id, e_id, p_bonus, 
+      p_year, p_mounth, p_status, 
+      p_time, p_basic, p_title, 
+      p_duties, p_skill, p_education, 
+      p_overtime, p_walfare, i_social, 
+      i_pension, i_medical, i_unemploy, 
+      p_housing, p_absence, p_fineother, 
+      p_finesum, p_shouldsum, p_realsum, 
+      p_tax)
+    values (#{pId,jdbcType=INTEGER}, #{eId,jdbcType=INTEGER}, #{pBonus,jdbcType=DOUBLE}, 
+      #{pYear,jdbcType=CHAR}, #{pMounth,jdbcType=CHAR}, #{pStatus,jdbcType=INTEGER}, 
+      #{pTime,jdbcType=TIMESTAMP}, #{pBasic,jdbcType=DOUBLE}, #{pTitle,jdbcType=DOUBLE}, 
+      #{pDuties,jdbcType=DOUBLE}, #{pSkill,jdbcType=DOUBLE}, #{pEducation,jdbcType=DOUBLE}, 
+      #{pOvertime,jdbcType=DOUBLE}, #{pWalfare,jdbcType=DOUBLE}, #{iSocial,jdbcType=DOUBLE}, 
+      #{iPension,jdbcType=DOUBLE}, #{iMedical,jdbcType=DOUBLE}, #{iUnemploy,jdbcType=DOUBLE}, 
+      #{pHousing,jdbcType=DOUBLE}, #{pAbsence,jdbcType=DOUBLE}, #{pFineother,jdbcType=DOUBLE}, 
+      #{pFinesum,jdbcType=DOUBLE}, #{pShouldsum,jdbcType=DOUBLE}, #{pRealsum,jdbcType=DOUBLE}, 
+      #{pTax,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.white.ssm.model.Pay" >
+    insert into pay_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        p_id,
+      </if>
+      <if test="eId != null" >
+        e_id,
+      </if>
+      <if test="pBonus != null" >
+        p_bonus,
+      </if>
+      <if test="pYear != null" >
+        p_year,
+      </if>
+      <if test="pMounth != null" >
+        p_mounth,
+      </if>
+      <if test="pStatus != null" >
+        p_status,
+      </if>
+      <if test="pTime != null" >
+        p_time,
+      </if>
+      <if test="pBasic != null" >
+        p_basic,
+      </if>
+      <if test="pTitle != null" >
+        p_title,
+      </if>
+      <if test="pDuties != null" >
+        p_duties,
+      </if>
+      <if test="pSkill != null" >
+        p_skill,
+      </if>
+      <if test="pEducation != null" >
+        p_education,
+      </if>
+      <if test="pOvertime != null" >
+        p_overtime,
+      </if>
+      <if test="pWalfare != null" >
+        p_walfare,
+      </if>
+      <if test="iSocial != null" >
+        i_social,
+      </if>
+      <if test="iPension != null" >
+        i_pension,
+      </if>
+      <if test="iMedical != null" >
+        i_medical,
+      </if>
+      <if test="iUnemploy != null" >
+        i_unemploy,
+      </if>
+      <if test="pHousing != null" >
+        p_housing,
+      </if>
+      <if test="pAbsence != null" >
+        p_absence,
+      </if>
+      <if test="pFineother != null" >
+        p_fineother,
+      </if>
+      <if test="pFinesum != null" >
+        p_finesum,
+      </if>
+      <if test="pShouldsum != null" >
+        p_shouldsum,
+      </if>
+      <if test="pRealsum != null" >
+        p_realsum,
+      </if>
+      <if test="pTax != null" >
+        p_tax,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="eId != null" >
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="pBonus != null" >
+        #{pBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="pYear != null" >
+        #{pYear,jdbcType=CHAR},
+      </if>
+      <if test="pMounth != null" >
+        #{pMounth,jdbcType=CHAR},
+      </if>
+      <if test="pStatus != null" >
+        #{pStatus,jdbcType=INTEGER},
+      </if>
+      <if test="pTime != null" >
+        #{pTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pBasic != null" >
+        #{pBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="pTitle != null" >
+        #{pTitle,jdbcType=DOUBLE},
+      </if>
+      <if test="pDuties != null" >
+        #{pDuties,jdbcType=DOUBLE},
+      </if>
+      <if test="pSkill != null" >
+        #{pSkill,jdbcType=DOUBLE},
+      </if>
+      <if test="pEducation != null" >
+        #{pEducation,jdbcType=DOUBLE},
+      </if>
+      <if test="pOvertime != null" >
+        #{pOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="pWalfare != null" >
+        #{pWalfare,jdbcType=DOUBLE},
+      </if>
+      <if test="iSocial != null" >
+        #{iSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="iPension != null" >
+        #{iPension,jdbcType=DOUBLE},
+      </if>
+      <if test="iMedical != null" >
+        #{iMedical,jdbcType=DOUBLE},
+      </if>
+      <if test="iUnemploy != null" >
+        #{iUnemploy,jdbcType=DOUBLE},
+      </if>
+      <if test="pHousing != null" >
+        #{pHousing,jdbcType=DOUBLE},
+      </if>
+      <if test="pAbsence != null" >
+        #{pAbsence,jdbcType=DOUBLE},
+      </if>
+      <if test="pFineother != null" >
+        #{pFineother,jdbcType=DOUBLE},
+      </if>
+      <if test="pFinesum != null" >
+        #{pFinesum,jdbcType=DOUBLE},
+      </if>
+      <if test="pShouldsum != null" >
+        #{pShouldsum,jdbcType=DOUBLE},
+      </if>
+      <if test="pRealsum != null" >
+        #{pRealsum,jdbcType=DOUBLE},
+      </if>
+      <if test="pTax != null" >
+        #{pTax,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.white.ssm.model.Pay" >
+    update pay_t
+    <set >
+      <if test="eId != null" >
+        e_id = #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="pBonus != null" >
+        p_bonus = #{pBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="pYear != null" >
+        p_year = #{pYear,jdbcType=CHAR},
+      </if>
+      <if test="pMounth != null" >
+        p_mounth = #{pMounth,jdbcType=CHAR},
+      </if>
+      <if test="pStatus != null" >
+        p_status = #{pStatus,jdbcType=INTEGER},
+      </if>
+      <if test="pTime != null" >
+        p_time = #{pTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pBasic != null" >
+        p_basic = #{pBasic,jdbcType=DOUBLE},
+      </if>
+      <if test="pTitle != null" >
+        p_title = #{pTitle,jdbcType=DOUBLE},
+      </if>
+      <if test="pDuties != null" >
+        p_duties = #{pDuties,jdbcType=DOUBLE},
+      </if>
+      <if test="pSkill != null" >
+        p_skill = #{pSkill,jdbcType=DOUBLE},
+      </if>
+      <if test="pEducation != null" >
+        p_education = #{pEducation,jdbcType=DOUBLE},
+      </if>
+      <if test="pOvertime != null" >
+        p_overtime = #{pOvertime,jdbcType=DOUBLE},
+      </if>
+      <if test="pWalfare != null" >
+        p_walfare = #{pWalfare,jdbcType=DOUBLE},
+      </if>
+      <if test="iSocial != null" >
+        i_social = #{iSocial,jdbcType=DOUBLE},
+      </if>
+      <if test="iPension != null" >
+        i_pension = #{iPension,jdbcType=DOUBLE},
+      </if>
+      <if test="iMedical != null" >
+        i_medical = #{iMedical,jdbcType=DOUBLE},
+      </if>
+      <if test="iUnemploy != null" >
+        i_unemploy = #{iUnemploy,jdbcType=DOUBLE},
+      </if>
+      <if test="pHousing != null" >
+        p_housing = #{pHousing,jdbcType=DOUBLE},
+      </if>
+      <if test="pAbsence != null" >
+        p_absence = #{pAbsence,jdbcType=DOUBLE},
+      </if>
+      <if test="pFineother != null" >
+        p_fineother = #{pFineother,jdbcType=DOUBLE},
+      </if>
+      <if test="pFinesum != null" >
+        p_finesum = #{pFinesum,jdbcType=DOUBLE},
+      </if>
+      <if test="pShouldsum != null" >
+        p_shouldsum = #{pShouldsum,jdbcType=DOUBLE},
+      </if>
+      <if test="pRealsum != null" >
+        p_realsum = #{pRealsum,jdbcType=DOUBLE},
+      </if>
+      <if test="pTax != null" >
+        p_tax = #{pTax,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.white.ssm.model.Pay" >
+    update pay_t
+    set e_id = #{eId,jdbcType=INTEGER},
+      p_bonus = #{pBonus,jdbcType=DOUBLE},
+      p_year = #{pYear,jdbcType=CHAR},
+      p_mounth = #{pMounth,jdbcType=CHAR},
+      p_status = #{pStatus,jdbcType=INTEGER},
+      p_time = #{pTime,jdbcType=TIMESTAMP},
+      p_basic = #{pBasic,jdbcType=DOUBLE},
+      p_title = #{pTitle,jdbcType=DOUBLE},
+      p_duties = #{pDuties,jdbcType=DOUBLE},
+      p_skill = #{pSkill,jdbcType=DOUBLE},
+      p_education = #{pEducation,jdbcType=DOUBLE},
+      p_overtime = #{pOvertime,jdbcType=DOUBLE},
+      p_walfare = #{pWalfare,jdbcType=DOUBLE},
+      i_social = #{iSocial,jdbcType=DOUBLE},
+      i_pension = #{iPension,jdbcType=DOUBLE},
+      i_medical = #{iMedical,jdbcType=DOUBLE},
+      i_unemploy = #{iUnemploy,jdbcType=DOUBLE},
+      p_housing = #{pHousing,jdbcType=DOUBLE},
+      p_absence = #{pAbsence,jdbcType=DOUBLE},
+      p_fineother = #{pFineother,jdbcType=DOUBLE},
+      p_finesum = #{pFinesum,jdbcType=DOUBLE},
+      p_shouldsum = #{pShouldsum,jdbcType=DOUBLE},
+      p_realsum = #{pRealsum,jdbcType=DOUBLE},
+      p_tax = #{pTax,jdbcType=DOUBLE}
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+
+  <select id="getByEid" parameterType="com.white.ssm.model.Employee" resultMap="BaseResultMap">
+    SELECT * FROM pay_t
+    WHERE e_id = #{eId,jdbcType=INTEGER}
+  </select>
+
+  <select id="getAll" parameterType="QueryBase" resultMap="BaseResultMap">
+    SELECT * FROM pay_t
+    ORDER by p_id limit ${limit_start}, ${pageSize}
+  </select>
+
+
+  <select id="getAllPageCount" parameterType="QueryBase" resultType="Long">
+    SELECT
+    COUNT(*)
+    FROM pay_t;
+  </select>
+
+  <select id="getAllPageCountByTime" parameterType="QueryBase" resultType="Long">
+    SELECT
+    COUNT(*)
+    FROM pay_t WHERE date_format(p_time,'%Y-%m')=${yearAndMounth}
+  </select>
+
+
+
+  <select id="getAllPageCountByDepartAndTime" parameterType="QueryBase" resultType="Long">
+    SELECT
+    COUNT(*)
+    FROM pay_t
+    WHERE e_id in (select e_id from employee_t WHERE e_depart = ${depart})
+    AND date_format(p_time,'%Y-%m')=${yearAndMounth}
+  </select>
+
+  <select id="getByYearAndMounth" parameterType="QueryBase" resultMap="BaseResultMap">
+    SELECT  * FROM pay_t WHERE date_format(p_time,'%Y-%m')=${yearAndMounth}
+    ORDER by p_id limit ${limit_start}, ${pageSize}
+  </select>
+
+
+  <select id="getByeIdPageCount" parameterType="QueryBase" resultType="Long">
+    SELECT
+    COUNT(*)
+    FROM pay_t
+    WHERE e_id = ${eId}
+  </select>
+
+  <select id="getByeId" parameterType="QueryBase" resultMap="BaseResultMap">
+    SELECT *
+    FROM pay_t
+    WHERE e_id = ${eId}
+  </select>
+
+  <select id="getByDepartAndTime" parameterType="QueryBase" resultMap="BaseResultMap">
+    SELECT  * FROM pay_t
+    WHERE e_id in (select e_id from employee_t WHERE e_depart = ${depart})
+    and date_format(p_time,'%Y-%m')=${yearAndMounth}
+    ORDER by p_id limit ${limit_start}, ${pageSize}
+  </select>
+
+  <select id="getByEidAndTime" parameterType="QueryBase" resultMap="BaseResultMap">
+    SELECT  * FROM pay_t
+    WHERE e_id = ${eId}
+    and date_format(p_time,'%Y-%m')=${yearAndMounth}
+  </select>
+
+</mapper>

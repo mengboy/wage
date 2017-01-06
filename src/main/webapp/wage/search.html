@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../wage/js/jquery.js"></script>
+        <script src="../wage/js/baseUrl.js"></script>
+        <meta charset="utf-8">
+        <title>工资查询</title>
+        <style type="text/css">
+            body{
+                background-image:url(images/bg.jpg);
+                }
+            fieldset{
+                background-color: white;
+                    }
+            #salary_search{
+                margin-top: 20px;
+                margin-left: 380px;
+                    }
+            #payrall{
+                margin-left: 350px;
+                margin-top:20px;
+                margin-right: 350px;
+            }
+            table{
+                border:1px solid black;
+                border-collapse: collapse;
+                margin-left:10px;
+                margin-right:10px;
+                width:600px;
+            }
+            td{
+                border:1px solid black;
+                line-height:2em;
+                text-align:center;
+            }
+            caption{
+                font-size:24px;
+                font-weight:bold;
+        }
+            .pay{
+                width:90%;
+                background:no-repeat 0 0 scroll;
+                border:none;
+                outline:medium;
+            }
+        </style>
+    </head>
+    <body>
+        <div id=salary_search>
+            <!--<form method="post">-->
+                 <label>工号：</label>
+                <input type="text" id="e_id" placeholder="User ID" required>
+                <label>密码：</label>
+                <input type="password" id="e_pass" placeholder="Password" required>
+                <label>时间：</label>
+                <input type="text" id="time" placeholder="格式：2016-12">
+                <input type="submit" id="submit" name="searchbtn" value="查询">
+            <!--</form>-->
+        </div>
+        <div id=payrall>
+            <fieldset>
+                <table>
+                    <caption>工资明细表</caption>
+                    <tbody>
+                    <tr>
+                        <td>姓名</td>
+                        <td><input class="pay" type="text" id="name"/></td>
+                        <td>工号</td>
+                        <td><input class="pay" type="number" id="number"/></td>
+                        <td>部门</td>
+                        <td><input class="pay" type="text" id="department"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">发放项目</td>
+                        <td colspan="3">扣减项目</td>
+                    </tr>
+                    <tr>
+                        <td>基本工资</td>
+                        <td colspan="2"><input class="pay" type="number" id="base"/></td>
+                        <td>社会保险</td>
+                        <td colspan="2"><input class="pay" type="number" id="social"/></td>
+                    </tr>
+                    <tr>
+                        <td>岗位工资</td>
+                        <td colspan="2"><input class="pay" type="number" id="title"/></td>
+                        <td>养老保险</td>
+                        <td colspan="2"><input class="pay" type="number" id="pension"/></td>
+                    </tr>
+                    <tr>
+                        <td>职务工资</td>
+                        <td colspan="2"><input class="pay" type="number" id="duties"/></td>
+                        <td>医疗保险</td>
+                        <td colspan="2"><input class="pay" type="number" id="medical"/></td>
+                    </tr>
+                    <tr>
+                        <td>技能工资</td>
+                        <td colspan="2"><input class="pay" type="number" id="skill"/></td>
+                        <td>失业保险</td>
+                        <td colspan="2"><input class="pay" type="number" id="unemployment"/></td>
+                    </tr>
+                    <tr>
+                        <td>学历工资</td>
+                        <td colspan="2"><input class="pay" type="number" id="education"/></td>
+                        <td>住房公积金</td>
+                        <td colspan="2"><input class="pay" type="number" id="houseFound"/></td>
+                    </tr>
+                    <tr>
+                        <td>加班费</td>
+                        <td colspan="2"><input class="pay" type="number" id="overtime"/></td>
+                        <td>缺勤扣除</td>
+                        <td colspan="2"><input class="pay" type="number" id="absence"/></td>
+                    </tr>
+                    <tr>
+                        <td>奖金</td>
+                        <td colspan="2"><input class="pay" type="number" id="bonus"/></td>
+                        <td>其他扣除</td>
+                        <td colspan="2"><input class="pay" type="number" id="other"/></td>
+                    </tr>
+                    <tr>
+                        <td>福利</td>
+                        <td colspan="2"><input class="pay" type="number" id="wage"/></td>
+                        <td>个人所得税</td>
+                        <td colspan="2"><input class="pay" type="number" id="tax"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">&nbsp</td>
+                    </tr>
+                    <tr>
+                        <td>应发合计</td>
+                        <td colspan="2"><input class="pay" type="number" id="shouldSum"/></td>
+                        <td>扣除合计</td>
+                        <td colspan="2"><input class="pay" type="number" id="deductionSum"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">&nbsp</td>
+                    </tr>
+                    <tr>
+                        <td>实发合计</td>
+                        <td colspan="2"><input class="pay" type="number" id="realWage"/></td>
+                        <td>发放时间</td>
+                        <td colspan="2"><input class="pay" id="giveTime" class="laydate-icon" onclick="laydate()" id="giveTime"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">备注：若工资明细有误，请联系相关部门，并将工资报错表提交给管理员</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </body>
+    <script src="../wage/js/formatTime.js"></script>
+    <script src="../wage/js/addContent.js"></script>
+<script>
+
+
+
+    $("#submit").click(function(){
+        var eId = $("#e_id").val();
+        var pass = $("#e_pass").val();
+        var time = $("#time").val();
+        if(eId != null && pass!=null)
+        {
+            $.ajax({
+                url:getBaseUrl() + "/getAllPayByEIdAndTime",
+                data:{
+                    eId: eId,
+                    pass: pass,
+                    time: time
+                },
+                type: "POST",
+                dataType: "json",
+                async: false,
+                cache: false,
+                success:function(results){
+                    if(results.status == 0)
+                    {
+                        var employee = results.employee;
+                        var pay = results.pay;
+                        var giveTime = formatTime(pay.pTime);
+                        setContent("name", employee.eName);
+                        setContent("number", employee.eId);
+                        setContent("department", employee.eDepart);
+                        setContent("base", pay.pBasic);
+                        setContent("social", pay.iSocial);
+                        setContent("title", pay.pTitle);
+                        setContent("pension", pay.iPension);
+                        setContent("duties", pay.pDuties);
+                        setContent("medical", pay.iMedical);
+                        setContent("skill", pay.pSkill);
+                        setContent("unemployment", pay.iUnemploy);
+                        setContent("education", pay.pEducation);
+                        setContent("houseFound", pay.pHousing);
+                        setContent("overtime", pay.pOvertime);
+                        setContent("absence", pay.pAbsence);
+                        setContent("bonus", pay.pBonus);
+                        setContent("other", pay.pFineother);
+                        setContent("wage", pay.pWalfare);
+                        setContent("tax", pay.pTax);
+                        setContent("shouldSum", pay.pShouldsum);
+                        setContent("deductionSum", pay.pFinesum);
+                        setContent("realWage", pay.pRealsum);
+                        setContent("giveTime", giveTime);
+
+                    }else if(results.status == 7)
+                    {
+                        alert("用户不存在");
+                    }else if(results.status == 1)
+                    {
+                        alert("密码错误");
+                    }else {
+                        alert("未知错误");
+                    }
+                }
+            });
+
+    }else {
+        alert("请填写用户名和密码");
+    }
+    });
+</script>
+</html>

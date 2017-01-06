@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.white.ssm.mapper.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.white.ssm.model.Employee" >
+    <id column="e_id" property="eId" jdbcType="INTEGER" />
+    <result column="e_name" property="eName" jdbcType="VARCHAR" />
+    <result column="e_sex" property="eSex" jdbcType="VARCHAR" />
+    <result column="e_title" property="eTitle" jdbcType="VARCHAR" />
+    <result column="order_by" property="orderBy" jdbcType="INTEGER" />
+    <result column="e_pass" property="ePass" jdbcType="VARCHAR" />
+    <result column="e_depart" property="eDepart" jdbcType="VARCHAR" />
+    <result column="e_img" property="eImg" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.white.ssm.model.Employee" extends="BaseResultMap" >
+    <result column="e_intro" property="eIntro" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    e_id, e_name, e_sex, e_title, order_by, e_pass, e_depart, e_img
+  </sql>
+  <sql id="Blob_Column_List" >
+    e_intro
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from employee_t
+    where e_id = #{eId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from employee_t
+    where e_id = #{eId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.white.ssm.model.Employee" >
+    insert into employee_t (e_id, e_name, e_sex, 
+      e_title, order_by, e_pass, 
+      e_depart, e_img, e_intro
+      )
+    values (#{eId,jdbcType=INTEGER}, #{eName,jdbcType=VARCHAR}, #{eSex,jdbcType=VARCHAR}, 
+      #{eTitle,jdbcType=VARCHAR}, #{orderBy,jdbcType=INTEGER}, #{ePass,jdbcType=VARCHAR}, 
+      #{eDepart,jdbcType=VARCHAR}, #{eImg,jdbcType=VARCHAR}, #{eIntro,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.white.ssm.model.Employee" >
+    insert into employee_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eId != null" >
+        e_id,
+      </if>
+      <if test="eName != null" >
+        e_name,
+      </if>
+      <if test="eSex != null" >
+        e_sex,
+      </if>
+      <if test="eTitle != null" >
+        e_title,
+      </if>
+      <if test="orderBy != null" >
+        order_by,
+      </if>
+      <if test="ePass != null" >
+        e_pass,
+      </if>
+      <if test="eDepart != null" >
+        e_depart,
+      </if>
+      <if test="eImg != null" >
+        e_img,
+      </if>
+      <if test="eIntro != null" >
+        e_intro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eId != null" >
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="eName != null" >
+        #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="eSex != null" >
+        #{eSex,jdbcType=VARCHAR},
+      </if>
+      <if test="eTitle != null" >
+        #{eTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="ePass != null" >
+        #{ePass,jdbcType=VARCHAR},
+      </if>
+      <if test="eDepart != null" >
+        #{eDepart,jdbcType=VARCHAR},
+      </if>
+      <if test="eImg != null" >
+        #{eImg,jdbcType=VARCHAR},
+      </if>
+      <if test="eIntro != null" >
+        #{eIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.white.ssm.model.Employee" >
+    update employee_t
+    <set >
+      <if test="eName != null" >
+        e_name = #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="eSex != null" >
+        e_sex = #{eSex,jdbcType=VARCHAR},
+      </if>
+      <if test="eTitle != null" >
+        e_title = #{eTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        order_by = #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="ePass != null" >
+        e_pass = #{ePass,jdbcType=VARCHAR},
+      </if>
+      <if test="eDepart != null" >
+        e_depart = #{eDepart,jdbcType=VARCHAR},
+      </if>
+      <if test="eImg != null" >
+        e_img = #{eImg,jdbcType=VARCHAR},
+      </if>
+      <if test="eIntro != null" >
+        e_intro = #{eIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.white.ssm.model.Employee" >
+    update employee_t
+    set e_name = #{eName,jdbcType=VARCHAR},
+      e_sex = #{eSex,jdbcType=VARCHAR},
+      e_title = #{eTitle,jdbcType=VARCHAR},
+      order_by = #{orderBy,jdbcType=INTEGER},
+      e_pass = #{ePass,jdbcType=VARCHAR},
+      e_depart = #{eDepart,jdbcType=VARCHAR},
+      e_img = #{eImg,jdbcType=VARCHAR},
+      e_intro = #{eIntro,jdbcType=LONGVARCHAR}
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.white.ssm.model.Employee" >
+    update employee_t
+    set e_name = #{eName,jdbcType=VARCHAR},
+      e_sex = #{eSex,jdbcType=VARCHAR},
+      e_title = #{eTitle,jdbcType=VARCHAR},
+      order_by = #{orderBy,jdbcType=INTEGER},
+      e_pass = #{ePass,jdbcType=VARCHAR},
+      e_depart = #{eDepart,jdbcType=VARCHAR},
+      e_img = #{eImg,jdbcType=VARCHAR}
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+
+  <select id="getAll" parameterType="QueryBase" resultMap="BaseResultMap">
+    SELECT * FROM employee_t
+    ORDER by order_by limit ${limit_start}, ${pageSize}
+  </select>
+
+
+  <select id="getAllPageCount" parameterType="QueryBase" resultType="Long">
+    SELECT
+    COUNT(*)
+    FROM employee_t;
+  </select>
+
+  <!--<select id="getAllPageCountByDepart-->
+  <select id="getAllPageCountByDepart" parameterType="QueryBase" resultType="Long">
+    SELECT
+    COUNT(*)
+    FROM employee_t WHERE e_depart = ${depart};
+  </select>
+
+  <select id="getAllByDepart" parameterType="QueryBase" resultMap="BaseResultMap">
+    SELECT * FROM employee_t
+    WHERE e_depart = ${depart}
+    ORDER by order_by limit ${limit_start}, ${pageSize}
+  </select>
+
+</mapper>
