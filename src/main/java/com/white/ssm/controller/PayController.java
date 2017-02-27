@@ -86,7 +86,7 @@ public class PayController {
                     return new Response(Status.SUCCESS, pay, employee);
                 }catch (Exception e)
                 {
-                    return new Response(Status.ERROR);
+                    return new Response(Status.NOT_EXISTS);
                 }
             }else {
                 System.out.print("pass" + employee.getePass());
@@ -94,7 +94,7 @@ public class PayController {
             }
 
         }
-        return Status.NOT_EXISTS;
+        return Status.PASSWORD_NOT_MATCH;
     }
 
     /**
