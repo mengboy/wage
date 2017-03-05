@@ -20,27 +20,29 @@
 </div>
 <div class="leftnav">
   <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
-  <h2><span class="icon-user"></span>基本设置</h2>
+
+
+  <h2><span class="icon-pencil-square-o"></span>基本设置</h2>
   <ul style="display:block">
     <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>个人主页</a></li>
     <li><a href="pass.jsp" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
     <li><a href="page.jsp" target="right"><span class="icon-caret-right"></span>公告发布</a></li>
-    <li><a href="adv.jsp" target="right"><span class="icon-caret-right"></span>我的邮箱</a></li>
-    <!--<li><a href="book.jsp" target="right"><span class="icon-caret-right"></span>留言管理</a></li>
-    <li><a href="column.jsp" target="right"><span class="icon-caret-right"></span>栏目管理</a></li>-->
+    <li><a href="email.jsp" target="right"><span class="icon-caret-right"></span>我的邮箱</a></li>
   </ul>
   <h2><span class="icon-pencil-square-o"></span>工资管理</h2>
   <ul>
       <li><a href="wage_entry.jsp" target="right"><span class="icon-caret-right"></span>工资录入</a></li>
     <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>工资查看</a></li>
-    <li><a href="cate.jsp" target="right"><span class="icon-caret-right"></span>报表查看</a></li>
+    <li><a href="table.jsp" target="right"><span class="icon-caret-right"></span>报表查看</a></li>
   </ul>
 
     <h2><span class="icon-pencil-square-o"></span>员工管理</h2>
     <ul>
-        <li><a href="showEmploy.jsp" target="right"><span class="icon-caret-right"></span>员工查看</a></li>
-        <li><a href="add.jsp" target="right"><span class="icon-caret-right"></span>添加员工</a></li>
+        <li><a href="showEmployee.jsp" target="right"><span class="icon-caret-right"></span>员工查看</a></li>
+        <li><a href="addEmployee.jsp" target="right"><span class="icon-caret-right"></span>添加员工</a></li>
     </ul>
+
+
 </div>
 <script type="text/javascript">
 $(function(){
@@ -58,7 +60,7 @@ $(function(){
 <ul class="bread">
   <li><a href="{:U('Index/info')}" target="right" class="icon-home"> 首页</a></li>
   <li><a href="##" id="a_leader_txt">网站信息</a></li>
-  <li><b>当前语言：</b><span style="color:red;">中文</php></span>
+  <li><b>当前语言：</b><span style="color:red;">中文</span>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;切换语言：<a href="##">中文</a> &nbsp;&nbsp;<a href="##">英文</a> </li>
 </ul>
 <div class="admin">

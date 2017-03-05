@@ -19,7 +19,7 @@
         <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
         <div class="padding border-bottom">
             <ul class="search" style="padding-left:10px;">
-                <li> <a class="button border-main icon-plus-square-o" href="add.jsp"> 添加员工</a> </li>
+                <li> <a class="button border-main icon-plus-square-o" href="addEmployee.jsp"> 添加员工</a> </li>
                 <if condition="$iscid eq 1">
                     <li>
                         <select id="select" class="input" style="width:200px; line-height:17px;" onchange="changesearch()">
