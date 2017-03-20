@@ -10,8 +10,13 @@
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-    <context:component-scan base-package="com.white.ssm.controller" />
-    <context:component-scan base-package="com.white.ssm.service" />
+    <context:component-scan base-package="com.white.ssm.*" />
+
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:email.properties" />
+    </bean>
+
     <!-- 扩充了注解驱动，可以将请求参数绑定到控制器参数 -->
     <mvc:annotation-driven/>
     <!-- 静态资源处理  css js imgs -->
@@ -37,6 +42,27 @@
     </bean>
 
 
+    <!--JavaMail 相关配置-->
+    <bean id="mailSender"
+          class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${host}"/>
+        <property name="username" value="${from}"/>
+        <property name="password" value="${emailpass}"/>
+        <property name="protocol" value="${protocol}"/>
+        <property name="defaultEncoding" value="${encoding}"/>
+        <property name="port" value="465"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.from">15680780793@163.com</prop>
+                <prop key="mail.debug">true</prop>
+                <!--<prop key="mail.transport.protocol">smtp</prop>-->
+                <prop key="mail.smtp.ssl.enable">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--<bean id="mail" class="com.white.ssm.mail.SendEmailServiceService"></bean>-->
 
     <!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
     <bean id="multipartResolver"

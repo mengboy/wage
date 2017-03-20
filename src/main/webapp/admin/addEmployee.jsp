@@ -236,7 +236,6 @@
 </body>
 <script>
 
-  //myData.append("", );
   $("#submit").click(function(){
       var myData = new FormData();
       myData.append('img', $('input[type=file]')[0].files[0]);

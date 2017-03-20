@@ -80,7 +80,7 @@ function del(id,mid){
           <label>标题：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" value="" name="title" data-validate="required:请输入标题" />
+          <input type="text" class="input w50" value="" name="title" id="subject" data-validate="required:请输入标题" />
           <div class="tips"></div>
         </div>
       </div>
@@ -89,7 +89,7 @@ function del(id,mid){
           <label>邮箱地址：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" name="url" value=""  />
+          <input type="text" class="input w50" name="url" id="address" value=""  />
           <div class="tips"></div>
         </div>
       </div>
@@ -108,7 +108,7 @@ function del(id,mid){
           <label>内容：</label>
         </div>
         <div class="field">
-          <textarea type="text" class="input" name="note" style="height:120px;" value=""></textarea>
+          <textarea type="text" class="input" name="note" style="height:120px;" id="context" value=""></textarea>
           <div class="tips"></div>
         </div>
       </div>
@@ -126,10 +126,41 @@ function del(id,mid){
           <label></label>
         </div>
         <div class="field">
-          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+          <button class="button bg-main icon-check-square-o" id="submit"> 提交</button>
         </div>
       </div>
     </form>
   </div>
 </div>
-</body></html>
+</body>
+<script src="../wage/js/baseUrl.js"></script>
+<script>
+    $("#submit").click(function(){
+        var subject = $("#subject").val();
+        var address = $("#address").val();
+        var context = $("#context").val();
+
+        $.ajax({
+            url:getBaseUrl() + "/sendEmail",
+            data:{
+                subject: subject,
+                to: address,
+                text: context
+            },
+            type: "POST",
+            dataType: "json",
+            async: false,
+            cache: false,
+            success:function(results){
+                if(results == 0)
+                {
+                    alert("发送成功");
+                }else {
+                    alert("发送失败");
+                }
+            }
+        });
+    });
+</script>
+
+</html>

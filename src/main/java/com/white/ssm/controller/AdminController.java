@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class AdminController {
-    @Resource
+    @Resource(name = "adminService")
     IAdminService iAdminService;
     /**
      * 首页跳转

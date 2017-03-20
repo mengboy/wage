@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Controller
 public class EmployController {
-    @Resource
+    @Resource(name = "employService")
     IEmployeeService iEmployeeService;
 
     /**
