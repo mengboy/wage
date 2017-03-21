@@ -99,7 +99,7 @@ function del(id,mid){
         </div>
         <div class="field">
           <input type="text" id="url1" name="img" class="input tips" style="width:25%; float:left;"  value="" data-toggle="hover" data-place="right" data-image="" />
-          <input type="button" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left;">
+          <input type="file" class="button bg-blue margin-left" id="file" value="+ 浏览上传"  style="float:left;">
           <div class="tipss">附件大小：100M以内</div>
         </div>
       </div>
@@ -135,22 +135,48 @@ function del(id,mid){
 </body>
 <script src="../wage/js/baseUrl.js"></script>
 <script>
-    $("#submit").click(function(){
-        var subject = $("#subject").val();
-        var address = $("#address").val();
-        var context = $("#context").val();
+//    $("#submit").click(function(){
+//        var subject = $("#subject").val();
+//        var address = $("#address").val();
+//        var context = $("#context").val();
+//
+//        $.ajax({
+//            url:getBaseUrl() + "/sendEmail",
+//            data:{
+//                subject: subject,
+//                to: address,
+//                text: context
+//            },
+//            type: "POST",
+//            dataType: "json",
+//            async: false,
+//            cache: false,
+//            success:function(results){
+//                if(results == 0)
+//                {
+//                    alert("发送成功");
+//                }else {
+//                    alert("发送失败");
+//                }
+//            }
+//        });
+//    });
 
+    $("#submit").click(function(){
+        var myData = new FormData();
+        myData.append('file', $('input[type=file]')[0].files[0]);
+        myData.append('subject', $("#subject").val());
+        myData.append('to', $("#address").val());
+        myData.append('text', $("#context").val());
         $.ajax({
             url:getBaseUrl() + "/sendEmail",
-            data:{
-                subject: subject,
-                to: address,
-                text: context
-            },
+            data:myData,
             type: "POST",
             dataType: "json",
             async: false,
             cache: false,
+            processData: false,
+            contentType: false,
             success:function(results){
                 if(results == 0)
                 {
@@ -161,6 +187,7 @@ function del(id,mid){
             }
         });
     });
+
 </script>
 
 </html>
